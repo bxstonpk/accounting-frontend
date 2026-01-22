@@ -9,21 +9,38 @@ import {
 import { DashboardPage } from './pages/dashboard/Dashboard'
 import { LoginPage } from './pages/login/Login'
 import { MasterData } from './pages/master_data/MasterData'
+import { OrgModal } from './pages/master_data/Models/Organization/OrgModal'
+import { CustomerMadal } from './pages/master_data/Models/customer/CustomerMadal'
+import { OrderMadal } from './pages/master_data/Models/order/OrderMadal'
 
 import './index.css'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <LoginPage />
   },
   {
-    path: "/dashboard",
+    path: '/dashboard',
     element: <DashboardPage />
   },
   {
-    path: "/master-data",
-    element: <MasterData />
+    path: '/master-data',
+    element: <MasterData />,
+    children: [
+      {
+        path: 'organization',
+        element: <OrgModal />
+      },
+      {
+        path: 'customer',
+        element: <CustomerMadal />
+      },
+      {
+        path: 'orders',
+        element: <OrderMadal />
+      }
+    ]
   }
 ])
 

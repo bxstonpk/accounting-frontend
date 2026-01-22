@@ -44,8 +44,8 @@ export const DashboardPage: React.FC = () => {
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">MRP Dashboard</h1>
-            <p className="text-sm text-gray-600 mt-1">Overview of materials, planning and recent activities</p>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Performance Organization</h1>
+            <p className="text-sm text-gray-600 mt-1">Overview of Organization, Accounting and recent activities</p>
           </div>
 
           <div className="flex items-center gap-3">

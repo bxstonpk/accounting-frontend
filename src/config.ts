@@ -19,47 +19,47 @@ export const config = {
             sub: [
                 {
                     title: 'Organization',
-                    path: '/organization',
+                    path: 'organization',
                     icon: faBuilding,
                 },
                 {
                     title: 'Customer',
-                    path: '/customer',
+                    path: 'customer',
                     icon: faAddressCard,
                 },
                 {
                     title: 'Supplier',
-                    path: '/supplier',
+                    path: 'supplier',
                     icon: faEnvelope,
                 },
                 {
                     title: 'Bank',
-                    path: '/bank',
+                    path: 'bank',
                     icon: faHome,
                 },
                 {
                     title: 'Account',
-                    path: '/account',
+                    path: 'account',
                     icon: faRectangleList,
                 },
                 {
                     title: 'Inventory',
-                    path: '/inventory',
+                    path: 'inventory',
                     icon: faAngry,
                 },
                 {
                     title: 'CRM',
-                    path: '/crm',
+                    path: 'crm',
                     icon: faAngry,
                 },
                 {
                     title: 'Orders',
-                    path: '/orders',
+                    path: 'orders',
                     icon: faAngry,
                 },
                 {
                     title: 'Tax Settings',
-                    path: '/tax-settings',
+                    path: 'tax-settings',
                     icon: faAngry,
                 },
             ]

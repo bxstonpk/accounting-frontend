@@ -1,5 +1,9 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+
+// import components
+import Modal from './components/Modal'
 
 // import from share
 import { ShareNav } from '../../share/nav/Nav'
@@ -10,28 +14,45 @@ import { config } from '../../config'
 const { navigation } = config
 
 export const MasterData: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const state = location.state as {
+        backgroundLocation?: Location;
+        actionId?: string;
+    }
 
     return <>
-        <ShareNav />
-        <div className="bg-gradient-to-br from-gray-100 to-gray-100 content-center p-4 md:p-6">
-            <div className="pt-16 max-w-7xl mx-auto">
-                <div className='px-6 w-[calc(100svw*9/12)] h-[calc(100svh-7rem)]'>
-                    {
-                        children ? (
-                            children
-                        ) : (
-                            <div className='h-full rounded-3xl bg-white/70 shadow'>
-                                <DefaultMasterView />
-                            </div>
-                        )
-                    }
+        <div id='master-data-main'>
+            <ShareNav />
+            <div className="bg-gradient-to-br from-gray-100 to-gray-100 content-center p-4 md:p-6">
+                <div className="pt-16 max-w-7xl mx-auto">
+                    <div className='px-6 w-[calc(100svw*9/12)] h-[calc(100svh-7rem)]'>
+                        {
+                            children ? (
+                                children
+                            ) : (
+                                <div className='h-full rounded-3xl bg-white/70 shadow'>
+                                    <DefaultMasterView />
+                                </div>
+                            )
+                        }
+                    </div>
                 </div>
             </div>
         </div>
+
+        {state?.backgroundLocation && (
+            <Modal onClose={() => navigate(-1)}>
+                <Outlet />
+            </Modal>
+        )}
     </>
 }
 
 const DefaultMasterView = () => {
+    const navigate = useNavigate()
+    const location = useLocation()
 
     return (
         <div className='space-y-6 p-6'>
@@ -49,7 +70,14 @@ const DefaultMasterView = () => {
                 {Object.values(navigation.masterData.sub).map((item) => (
                     <button
                         key={item.path}
-                        onClick={() => window.location.href += item.path}
+                        onClick={() => {
+
+                            navigate(item.path, {
+                                state: {
+                                    backgroundLocation: location,
+                                }
+                            })
+                        }}
                         className='
                             group
                             relative
@@ -76,7 +104,11 @@ const DefaultMasterView = () => {
                         />
                         <div className='relative z-10 flex items-start gap-4'>
                             <div className='
-                                flex h-12 w-12 items-center justify-center
+                                flex 
+                                h-12 
+                                w-12
+                                items-center
+                                justify-center
                                 rounded-xl
                                 bg-blue-50
                                 text-blue-600
