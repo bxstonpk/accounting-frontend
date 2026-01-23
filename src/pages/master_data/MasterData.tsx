@@ -13,7 +13,7 @@ import { config } from '../../config'
 
 const { navigation } = config
 
-export const MasterData: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+export const MasterData: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -23,27 +23,25 @@ export const MasterData: React.FC<{ children?: React.ReactNode }> = ({ children 
     }
 
     return <>
+        <ShareNav />
         <div id='master-data-main'>
-            <ShareNav />
-            <div className="bg-gradient-to-br from-gray-100 to-gray-100 content-center p-4 md:p-6">
-                <div className="pt-16 max-w-7xl mx-auto">
-                    <div className='px-6 w-[calc(100svw*9/12)] h-[calc(100svh-7rem)]'>
-                        {
-                            children ? (
-                                children
-                            ) : (
-                                <div className='h-full rounded-3xl bg-white/70 shadow'>
-                                    <DefaultMasterView />
-                                </div>
-                            )
-                        }
+            <div className='bg-gradient-to-br from-gray-100 to-gray-100 content-center p-4 md:p-6'>
+                <div className='pt-16 max-w-7xl mx-auto'>
+                    <div className="space-y-8">
+                        <div className='w-[calc(100svw*9/12)] h-[calc(100svh-7rem)]'>
+                            <div className='h-full rounded-3xl bg-white/70 shadow'>
+                                <DefaultMasterView />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         {state?.backgroundLocation && (
-            <Modal onClose={() => navigate(-1)}>
+            <Modal onClose={() => {
+                navigate(-1)
+            }}>
                 <Outlet />
             </Modal>
         )}
@@ -58,15 +56,15 @@ const DefaultMasterView = () => {
         <div className='space-y-6 p-6'>
 
             <div>
-                <h1 className="text-2xl font-semibold text-slate-800">
+                <h1 className='text-2xl font-semibold text-slate-800'>
                     Master Data
                 </h1>
-                <p className="text-sm text-slate-500">
+                <p className='text-sm text-slate-500'>
                     Manage core data used across the system
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
                 {Object.values(navigation.masterData.sub).map((item) => (
                     <button
                         key={item.path}

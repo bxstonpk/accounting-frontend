@@ -16,9 +16,10 @@ export default function Modal({ children, onClose }: ModalProps) {
       <div
         className='
           relative
-          w-[calc(100svw-10rem)] h-[calc(100svh-2rem)] max-w-svw max-h-svh
+          w-[calc(100svw*9/12)]
+          h-[calc(100svh-7rem)]
           rounded-3xl
-          bg-white
+          bg-white/70
           backdrop-blur-2xl 
           border 
           border-white/20 
@@ -26,7 +27,7 @@ export default function Modal({ children, onClose }: ModalProps) {
           transition 
           duration-500 
           hover:shadow-2xl
-          p-36
+          p-10
         '
         onClick={(e) => e.stopPropagation()}
       >
