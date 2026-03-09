@@ -22,6 +22,9 @@ import { TaxsettingMadal } from './pages/master_data/Models/taxSetting/Taxsettin
 import { OrgSetup } from './pages/master_data/Models/Organization/childens/OrgSetup'
 import { Quotation } from './pages/revenues/sub-pages/quotation/Quotation'
 
+// import class widgets
+import { ServiceNotImplement } from './widgets/ServiceNotImplement'
+
 import './index.css'
 
 const router = createBrowserRouter([
@@ -88,6 +91,10 @@ const router = createBrowserRouter([
   {
     path: '/revenues/quotation',
     element: <Quotation />,
+  },
+  {
+    path: '/expenses',
+    element: <ServiceNotImplement />
   }
 ])
 
