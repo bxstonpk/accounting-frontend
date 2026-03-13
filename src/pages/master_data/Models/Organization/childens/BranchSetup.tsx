@@ -1,37 +1,37 @@
 import React, { useState } from 'react'
-import { Plus, Search, MoreHorizontal, Landmark } from 'lucide-react'
+import { Plus, Search, MoreHorizontal, GitBranch, MapPin, Phone } from 'lucide-react'
 
-const mockBanks = [
-    { id: 1, code: 'KBANK', name_th: 'ธนาคารกสิกรไทย', name_en: 'Kasikorn Bank', swift_code: 'KASITHBK', branch: 'สำนักงานใหญ่', account_no: '123-4-56789-0', account_type: 'Savings', status: 'Active' },
-    { id: 2, code: 'SCB', name_th: 'ธนาคารไทยพาณิชย์', name_en: 'Siam Commercial Bank', swift_code: 'SICOTHBK', branch: 'สาขาสีลม', account_no: '234-5-67890-1', account_type: 'Current', status: 'Active' },
-    { id: 3, code: 'BBL', name_th: 'ธนาคารกรุงเทพ', name_en: 'Bangkok Bank', swift_code: 'BKKBTHBK', branch: 'สำนักงานใหญ่', account_no: '345-6-78901-2', account_type: 'Savings', status: 'Active' },
-    { id: 4, code: 'KTB', name_th: 'ธนาคารกรุงไทย', name_en: 'Krungthai Bank', swift_code: 'KRTHTHBK', branch: 'สาขาพระราม 4', account_no: '456-7-89012-3', account_type: 'Current', status: 'Inactive' },
+const mockBranches = [
+    { id: 1, code: 'HQ', name_th: 'สำนักงานใหญ่', address: '123 ถ.สุขุมวิท กรุงเทพฯ', phone: '02-123-4567', branch_no: '00000', status: 'Active' },
+    { id: 2, code: 'BKK-02', name_th: 'สาขาสีลม', address: '456 ถ.สีลม กรุงเทพฯ', phone: '02-234-5678', branch_no: '00001', status: 'Active' },
+    { id: 3, code: 'CNX-01', name_th: 'สาขาเชียงใหม่', address: '789 ถ.ห้วยแก้ว เชียงใหม่', phone: '053-111-2222', branch_no: '00002', status: 'Active' },
+    { id: 4, code: 'CHB-01', name_th: 'สาขาชลบุรี', address: '321 ถ.สุขุมวิท ชลบุรี', phone: '038-333-4444', branch_no: '00003', status: 'Inactive' },
 ]
 
-export const BankMadal: React.FC = () => {
+export const BranchSetup: React.FC = () => {
     const [search, setSearch] = useState('')
 
-    const filtered = mockBanks.filter(
-        (b) => b.name_th.includes(search) || b.name_en.toLowerCase().includes(search.toLowerCase()) || b.code.toLowerCase().includes(search.toLowerCase())
+    const filtered = mockBranches.filter(
+        (b) => b.name_th.includes(search) || b.code.toLowerCase().includes(search.toLowerCase()) || b.branch_no.includes(search)
     )
 
     return (
         <div className="space-y-6 h-full flex flex-col">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-xl font-semibold text-slate-800">Bank Accounts</h1>
-                    <p className="text-sm text-slate-500 mt-0.5">Manage bank account information</p>
+                    <h1 className="text-xl font-semibold text-slate-800">Branches</h1>
+                    <p className="text-sm text-slate-500 mt-0.5">Manage company branches</p>
                 </div>
                 <button className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-medium shadow-sm hover:scale-105 transition">
                     <Plus size={16} />
-                    Add Bank
+                    Add Branch
                 </button>
             </div>
 
             <div className="flex items-center gap-3">
                 <div className="relative flex-1">
                     <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                    <input type="text" placeholder="Search banks..." value={search} onChange={(e) => setSearch(e.target.value)}
+                    <input type="text" placeholder="Search branches..." value={search} onChange={(e) => setSearch(e.target.value)}
                         className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition" />
                 </div>
                 <span className="text-xs text-slate-400">{filtered.length} records</span>
@@ -42,11 +42,9 @@ export const BankMadal: React.FC = () => {
                     <thead>
                         <tr className="bg-slate-50/80">
                             <th className="px-4 py-3 font-medium text-slate-500">Code</th>
-                            <th className="px-4 py-3 font-medium text-slate-500">Bank</th>
-                            <th className="px-4 py-3 font-medium text-slate-500">SWIFT</th>
                             <th className="px-4 py-3 font-medium text-slate-500">Branch</th>
-                            <th className="px-4 py-3 font-medium text-slate-500">Account No</th>
-                            <th className="px-4 py-3 font-medium text-slate-500">Type</th>
+                            <th className="px-4 py-3 font-medium text-slate-500">Branch No</th>
+                            <th className="px-4 py-3 font-medium text-slate-500">Contact</th>
                             <th className="px-4 py-3 font-medium text-slate-500">Status</th>
                             <th className="px-4 py-3 font-medium text-slate-500 text-right">Actions</th>
                         </tr>
@@ -57,22 +55,24 @@ export const BankMadal: React.FC = () => {
                                 <td className="px-4 py-3 font-mono text-xs text-slate-500">{b.code}</td>
                                 <td className="px-4 py-3">
                                     <div className="flex items-center gap-3">
-                                        <div className="h-9 w-9 rounded-lg bg-emerald-50 text-emerald-500 flex items-center justify-center shrink-0">
-                                            <Landmark size={16} />
+                                        <div className="h-9 w-9 rounded-lg bg-violet-50 text-violet-500 flex items-center justify-center shrink-0">
+                                            <GitBranch size={16} />
                                         </div>
                                         <div>
-                                            <p className="font-medium text-slate-800">{b.name_en}</p>
-                                            <p className="text-xs text-slate-400 mt-0.5">{b.name_th}</p>
+                                            <p className="font-medium text-slate-800">{b.name_th}</p>
+                                            <p className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
+                                                <MapPin size={10} /> {b.address}
+                                            </p>
                                         </div>
                                     </div>
                                 </td>
-                                <td className="px-4 py-3 font-mono text-xs text-slate-600">{b.swift_code}</td>
-                                <td className="px-4 py-3 text-sm text-slate-600">{b.branch}</td>
-                                <td className="px-4 py-3 font-mono text-xs text-slate-600">{b.account_no}</td>
                                 <td className="px-4 py-3">
-                                    <span className={`inline-block px-2.5 py-1 rounded-lg text-xs font-medium ${b.account_type === 'Savings' ? 'bg-blue-50 text-blue-600' : 'bg-violet-50 text-violet-600'}`}>
-                                        {b.account_type}
-                                    </span>
+                                    <span className="inline-block px-2.5 py-1 rounded-lg bg-slate-100 text-xs font-medium text-slate-600 font-mono">{b.branch_no}</span>
+                                </td>
+                                <td className="px-4 py-3">
+                                    <p className="text-xs text-slate-500 flex items-center gap-1">
+                                        <Phone size={10} /> {b.phone}
+                                    </p>
                                 </td>
                                 <td className="px-4 py-3">
                                     <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${b.status === 'Active' ? 'bg-emerald-50 text-emerald-600' : 'bg-slate-100 text-slate-500'}`}>
@@ -88,7 +88,7 @@ export const BankMadal: React.FC = () => {
                             </tr>
                         ))}
                         {filtered.length === 0 && (
-                            <tr><td colSpan={8} className="px-4 py-12 text-center text-sm text-slate-400">No banks found</td></tr>
+                            <tr><td colSpan={6} className="px-4 py-12 text-center text-sm text-slate-400">No branches found</td></tr>
                         )}
                     </tbody>
                 </table>

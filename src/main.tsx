@@ -19,8 +19,26 @@ import { AccountMadal } from './pages/master_data/Models/account/AccountMadal'
 import { InventoryMadal } from './pages/master_data/Models/inventory/InventoryMadal'
 import { CrmManal } from './pages/master_data/Models/crm/CrmManal'
 import { TaxsettingMadal } from './pages/master_data/Models/taxSetting/TaxsettingMadal'
-import { OrgSetup } from './pages/master_data/Models/Organization/childens/OrgSetup'
 import { Quotation } from './pages/revenues/sub-pages/quotation/Quotation'
+
+// Organization children
+import { OrgSetup } from './pages/master_data/Models/Organization/childens/OrgSetup'
+import { BranchSetup } from './pages/master_data/Models/Organization/childens/BranchSetup'
+import { DepartmentSetup } from './pages/master_data/Models/Organization/childens/DepartmentSetup'
+
+// Inventory children
+import { ProductSetup } from './pages/master_data/Models/inventory/childens/ProductSetup'
+import { WarehouseSetup } from './pages/master_data/Models/inventory/childens/WarehouseSetup'
+import { UomSetup } from './pages/master_data/Models/inventory/childens/UomSetup'
+import { CategorySetup } from './pages/master_data/Models/inventory/childens/CategorySetup'
+
+// Order children
+import { PurchaseOrderSetup } from './pages/master_data/Models/order/childens/PurchaseOrderSetup'
+import { SalesOrderSetup } from './pages/master_data/Models/order/childens/SalesOrderSetup'
+
+// Tax Settings children
+import { VatSetup } from './pages/master_data/Models/taxSetting/childens/VatSetup'
+import { WhtSetup } from './pages/master_data/Models/taxSetting/childens/WhtSetup'
 
 // import class widgets
 import { ServiceNotImplement } from './widgets/ServiceNotImplement'
@@ -44,10 +62,9 @@ const router = createBrowserRouter([
         path: 'organization',
         element: <OrgModal />,
         children: [
-          {
-            path: 'organization',
-            element: <OrgSetup />
-          }
+          { path: 'companies', element: <OrgSetup /> },
+          { path: 'branches', element: <BranchSetup /> },
+          { path: 'departments', element: <DepartmentSetup /> },
         ],
       },
       {
@@ -68,7 +85,13 @@ const router = createBrowserRouter([
       },
       {
         path: 'inventory',
-        element: <InventoryMadal />
+        element: <InventoryMadal />,
+        children: [
+          { path: 'products', element: <ProductSetup /> },
+          { path: 'warehouses', element: <WarehouseSetup /> },
+          { path: 'uom', element: <UomSetup /> },
+          { path: 'categories', element: <CategorySetup /> },
+        ],
       },
       {
         path: 'crm',
@@ -76,11 +99,19 @@ const router = createBrowserRouter([
       },
       {
         path: 'orders',
-        element: <OrderMadal />
+        element: <OrderMadal />,
+        children: [
+          { path: 'purchase', element: <PurchaseOrderSetup /> },
+          { path: 'sales', element: <SalesOrderSetup /> },
+        ],
       },
       {
         path: 'tax-settings',
-        element: <TaxsettingMadal />
+        element: <TaxsettingMadal />,
+        children: [
+          { path: 'vat', element: <VatSetup /> },
+          { path: 'wht', element: <WhtSetup /> },
+        ],
       },
     ]
   },

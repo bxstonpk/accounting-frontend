@@ -6,7 +6,7 @@ type ModalProps = {
 
 export default function OrgMainMadal({ children }: ModalProps) {
     return (
-        <div>
+        <div className="animate-fadeIn h-full">
             {children}
         </div>
     )
